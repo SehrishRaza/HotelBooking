@@ -8,7 +8,7 @@ public class DeleteBookingTest extends BaseClass {
     @Test
     public void deleteBooking() throws InterruptedException{
         BookingPage bookingPage = new BookingPage(getDriver());
-        bookingPage.navigate();
+        bookingPage.navigate(getProperties("url"));
         Optional<WebElement> booking = bookingPage.findBooking(getProperties("firstName"), getProperties("lastName"));
         if(booking.isPresent()){
             bookingPage.deleteBooking(booking.get());

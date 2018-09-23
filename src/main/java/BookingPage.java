@@ -42,8 +42,8 @@ public class BookingPage {
         this.driver = driver;
     }
 
-    public void navigate() throws InterruptedException {
-        driver.navigate().to("http://hotel-test.equalexperts.io/");
+    public void navigate(String url) throws InterruptedException {
+        driver.navigate().to(url);
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         // wait for jQuery to load

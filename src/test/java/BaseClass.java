@@ -3,6 +3,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,18 +11,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import static org.openqa.selenium.remote.BrowserType.IE;
+
 public class BaseClass {
 
     WebDriver driver;
     Properties prop = new Properties();
 
+
     @Before
     public void before() {
-        System.setProperty("webdriver.chrome.driver", getClass().getClassLoader().getResource("chromedriver").getPath());
-
-        driver = new ChromeDriver();
-
         loadProperties();
+        String browser = getProperties("browser");
+        if (browser.equalsIgnoreCase("Firefox")) {
+            System.setProperty("webdriver.gecko.driver", getClass().getClassLoader().getResource("geckodriver").getPath());
+            driver = new FirefoxDriver();
+        } else {
+            System.setProperty("webdriver.chrome.driver", getClass().getClassLoader().getResource("chromedriver").getPath());
+            driver = new ChromeDriver();
+        }
     }
 
     private void loadProperties() {
@@ -47,8 +55,8 @@ public class BaseClass {
         return driver;
     }
 
-    public String getProperties(String value){
-       return prop.getProperty(value);
+    public String getProperties(String value) {
+        return prop.getProperty(value);
     }
 
 

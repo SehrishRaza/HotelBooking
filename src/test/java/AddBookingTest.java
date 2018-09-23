@@ -5,7 +5,7 @@ public class AddBookingTest extends BaseClass{
     @Test
     public void createBooking() throws InterruptedException {
         BookingPage bookingPage = new BookingPage(getDriver());
-        bookingPage.navigate();
+        bookingPage.navigate(getProperties("url"));
         bookingPage.setFirstName(getProperties("firstName"));
         bookingPage.setLastName(getProperties("lastName"));
         bookingPage.setTotalPrice(getProperties("totalPrice"));
